@@ -18,15 +18,12 @@ body {
     position: absolute;
     will-change: transform; /* Optimise les performances */
     opacity: 0.85;
-    transition: transform 1s ease-out; /* Transition lisse pour le déplacement */
+    transition: transform 0.5s ease, border 0.5s ease; /* Transition lisse pour le déplacement et la bordure */
+    border: 2px solid #000; /* Bordure noire de 2px */
+    box-sizing: border-box; /* Inclut la bordure dans les dimensions de l'élément */
 }
 
 /* Changement de couleur de fond au survol */
 .container:hover {
     background-color: #0000ff; /* Bleu lorsque survolé */
-}
-
-/* Animation pour placer les lettres au centre */
-.container.center-letters .letter {
-    transform: translate(0, 0) !important; /* Réinitialise la transformation pour le centrage */
 }

@@ -34,17 +34,19 @@ function createFloatingLetter(src) {
 
     // Fonction d'animation pour le mouvement chaotique
     function animate() {
-        // Déplacement horizontal
-        x += speedX;
-        // Rebondir sur les bords horizontaux
-        if (x > containerWidth - size || x < 0) speedX *= -1;
-        // Déplacement vertical
-        y += speedY;
-        // Rebondir sur les bords verticaux
-        if (y > containerHeight - size || y < 0) speedY *= -1;
+        if (!container.classList.contains('center-letters')) {
+            // Déplacement horizontal
+            x += speedX;
+            // Rebondir sur les bords horizontaux
+            if (x > containerWidth - size || x < 0) speedX *= -1;
+            // Déplacement vertical
+            y += speedY;
+            // Rebondir sur les bords verticaux
+            if (y > containerHeight - size || y < 0) speedY *= -1;
 
-        img.style.left = x + 'px';
-        img.style.top = y + 'px';
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+        }
 
         requestAnimationFrame(animate);
     }
@@ -73,11 +75,33 @@ function initialize() {
 
 initialize();
 
-// Gestion des événements pour changement de couleur de fond
+// Fonction pour recentrer les lettres au centre de la div
+function centerLetters() {
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.width / 2;
+    const centerY = containerRect.height / 2;
+
+    document.querySelectorAll('.letter').forEach(img => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenterX = imgRect.width / 2;
+        const imgCenterY = imgRect.height / 2;
+
+        const translateX = centerX - imgCenterX;
+        const translateY = centerY - imgCenterY;
+
+        img.style.transition = 'transform 0.5s ease'; // Transition lisse pour le centrage
+        img.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    });
+}
+
+// Gestion des événements pour changement de couleur de fond et centrage des lettres
 container.addEventListener('mouseover', () => {
     container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
+    container.classList.add('center-letters');
+    centerLetters();
 });
 
 container.addEventListener('mouseout', () => {
     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
+    container.classList.remove('center-letters');
 });
