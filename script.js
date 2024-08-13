@@ -1,37 +1,51 @@
-
 const container = document.querySelector('.container');
 
-// Fonction pour créer une image de lettre flottante
+// Fonction pour créer une image de lettre flottante avec un mouvement chaotique
 function createFloatingLetter(src) {
     const img = document.createElement('img');
     img.src = src;
     img.className = 'letter';
 
-    // Taille aléatoire entre 150px et 300px
-    img.style.width = Math.random() * 150 + 150 + 'px'; 
-    img.style.left = Math.random() * 100 + 'vw';
-    img.style.top = Math.random() * 100 + 'vh';
-    img.style.animationDuration = Math.random() * 20 + 15 + 's'; // Durée d'animation aléatoire entre 15s et 35s
+    // Taille 5 fois plus grande : entre 750px et 1500px
+    const size = Math.random() * 750 + 750;
+    img.style.width = size + 'px';
+    img.style.height = 'auto'; // Garde le ratio d'aspect correct
+
+    // Position initiale aléatoire unique pour chaque lettre
+    let x = Math.random() * (100 - (size / window.innerWidth * 100));
+    let y = Math.random() * (100 - (size / window.innerHeight * 100));
+    img.style.left = x + 'vw';
+    img.style.top = y + 'vh';
 
     container.appendChild(img);
 
-    let directionX = Math.random() * 0.5 + 0.1; // Vitesse horizontale
-    let directionY = Math.random() * 0.5 + 0.1; // Vitesse verticale
+    // Vitesse de déplacement (5 fois plus lente)
+    const speed = 0.01; // Réduit la vitesse
+
+    // Paramètres pour le mouvement chaotique
+    let time = Math.random() * 100; // Temps initial aléatoire pour éviter les chevauchements
+    const freqX = Math.random() * 0.5 + 0.1; // Fréquence pour mouvement horizontal
+    const freqY = Math.random() * 0.5 + 0.1; // Fréquence pour mouvement vertical
+    const ampX = Math.random() * 5 + 5; // Amplitude pour mouvement horizontal
+    const ampY = Math.random() * 5 + 5; // Amplitude pour mouvement vertical
 
     function animate() {
-        let x = parseFloat(img.style.left);
-        let y = parseFloat(img.style.top);
+        // Déplacement horizontal et vertical basé sur plusieurs sinusoïdes
+        x += speed;
+        y += Math.sin(time * freqY) * ampY;
 
-        // Mise à jour des positions
-        x += directionX;
-        y += directionY;
+        // Rebondir sur les bords horizontaux
+        if (x > 100 - (size / window.innerWidth * 100) || x < 0) {
+            // Inverser la direction horizontale
+            speed *= -1;
+        }
 
-        // Rebondir sur les bords
-        if (x > 100 || x < 0) directionX *= -1;
-        if (y > 100 || y < 0) directionY *= -1;
-
+        // Ajuster la position basée sur une combinaison de sinusoïdes
         img.style.left = x + 'vw';
         img.style.top = y + 'vh';
+
+        // Incrémenter le temps pour le mouvement chaotique
+        time += 0.05;
 
         requestAnimationFrame(animate);
     }
@@ -39,6 +53,7 @@ function createFloatingLetter(src) {
     animate();
 }
 
+// Définir les images avec les vraies lettres
 const images = [
     "images/A.png",
     "images/B.png",
@@ -53,6 +68,9 @@ const images = [
     // Ajoutez ici les chemins de toutes vos images de lettres
 ];
 
-images.forEach(src => createFloatingLetter(src));
+// Assurez-vous que les lettres ne se chevauchent pas au démarrage
+function initialize() {
+    images.forEach(src => createFloatingLetter(src));
+}
 
-
+initialize();
