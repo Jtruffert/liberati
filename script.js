@@ -86,17 +86,23 @@ function centerLetters() {
         const imgWidth = imgRect.width;
         const imgHeight = imgRect.height;
 
+        // Position actuelle de l'image dans la div
         const imgLeft = imgRect.left - containerRect.left;
         const imgTop = imgRect.top - containerRect.top;
 
+        // Calcul du centre de l'image
         const imgCenterX = imgLeft + imgWidth / 2;
         const imgCenterY = imgTop + imgHeight / 2;
 
+        // Calcul du déplacement nécessaire pour centrer l'image
         const translateX = centerX - imgCenterX;
         const translateY = centerY - imgCenterY;
 
+        // Déplacement vers le centre
         img.style.transition = 'transform 1s ease'; // Transition lisse pour le centrage
         img.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        img.style.left = `${centerX - imgWidth / 2}px`; // Alignement du centre de l'image avec le centre de la div
+        img.style.top = `${centerY - imgHeight / 2}px`;
     });
 }
 
@@ -110,4 +116,40 @@ container.addEventListener('mouseover', () => {
 container.addEventListener('mouseout', () => {
     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
     container.classList.remove('center-letters'); // Retire la classe pour reprendre le mouvement
+
+    // Redémarre le mouvement chaotique des lettres
+    document.querySelectorAll('.letter').forEach(img => {
+        // Recalculer la position initiale aléatoire pour chaque lettre
+        const containerWidth = container.offsetWidth;
+        const containerHeight = container.offsetHeight;
+        const size = parseInt(img.style.width);
+
+        let x = Math.random() * (containerWidth - size);
+        let y = Math.random() * (containerHeight - size);
+        
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+
+        // Réinitialiser les vitesses et directions pour le mouvement chaotique
+        let speedX = Math.random() * (2 - 0.5) + 0.5;
+        let speedY = Math.random() * (2 - 0.5) + 0.5;
+        if (Math.random() < 0.5) speedX *= -1;
+        if (Math.random() < 0.5) speedY *= -1;
+
+        // Reprendre l'animation chaotique
+        function animate() {
+            x += speedX;
+            y += speedY;
+
+            if (x > containerWidth - size || x < 0) speedX *= -1;
+            if (y > containerHeight - size || y < 0) speedY *= -1;
+
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    });
 });
