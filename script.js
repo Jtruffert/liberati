@@ -89,3 +89,12 @@ function initialize() {
 }
 
 initialize();
+
+// Gestion des événements pour changement de couleur de fond
+container.addEventListener('mouseover', () => {
+    document.body.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
+});
+
+container.addEventListener('mouseout', () => {
+    document.body.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
+});

@@ -1,13 +1,15 @@
+/* Règles de base */
 body {
     margin: 0;
     overflow: hidden; /* Empêche le défilement */
-    background-color: #f0f0f0; /* Couleur de fond */
+    background-color: #f0f0f0; /* Couleur de fond initiale */
 }
 
 .container {
     position: relative;
     width: 100vw;
     height: 100vh;
+    transition: background-color 0.5s ease; /* Transition pour changement de couleur */
 }
 
 .letter {
@@ -15,4 +17,9 @@ body {
     will-change: transform; /* Optimise les performances */
     opacity: 0.85;
     transition: transform 0.5s linear; /* Transition lisse */
+}
+
+/* Changement de couleur de fond au survol */
+.container:hover {
+    background-color: #0000ff; /* Bleu lorsque survolé */
 }
