@@ -19,7 +19,7 @@ function createFloatingLetter(src) {
 
     container.appendChild(img);
 
-    // Vitesse de déplacement horizontale aléatoire entre deux bornes
+    // Vitesse horizontale aléatoire entre deux bornes
     const minSpeed = 0.005;
     const maxSpeed = 0.02;
     let speed = Math.random() * (maxSpeed - minSpeed) + minSpeed;
@@ -29,7 +29,7 @@ function createFloatingLetter(src) {
         speed *= -1;
     }
 
-    // Paramètres pour le mouvement vertical chaotique
+    // Paramètres pour le mouvement vertical
     let time = Math.random() * 100; // Temps initial aléatoire pour éviter les chevauchements
     const freqY = Math.random() * 0.1 + 0.05; // Fréquence pour mouvement vertical
     const ampY = Math.random() * 5 + 5; // Amplitude pour mouvement vertical
@@ -49,7 +49,7 @@ function createFloatingLetter(src) {
 
         // Déplacement vertical basé sur une fonction sinusoïdale pour un mouvement fluide
         y += Math.sin(time * freqY) * 0.5; // Ajuster l'amplitude pour un mouvement vertical fluide
-        time += 0.01; // Ajuster le temps pour un mouvement plus fluide
+        time += 0.02; // Ajuster le temps pour un mouvement plus fluide
 
         // Assurer que les lettres restent dans le cadre verticalement
         if (y > 100 - (size / window.innerHeight * 100)) {
