@@ -7,7 +7,7 @@ function createFloatingLetter(src) {
     img.className = 'letter';
 
     // Taille 5 fois plus grande : entre 750px et 1500px
-    const size = Math.random() * 750 + 750;
+    const size = 1000
     img.style.width = size + 'px';
     img.style.height = 'auto'; // Garde le ratio d'aspect correct
 
