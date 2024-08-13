@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Empêche le défilement */
+    background-color: #f0f0f0; /* Couleur de fond */
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.letter {
+    position: absolute;
+    will-change: transform; /* Optimise les performances */
+    opacity: 0.85;
+    transition: transform 0.5s linear; /* Transition lisse */
+}
