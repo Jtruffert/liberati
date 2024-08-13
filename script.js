@@ -7,62 +7,44 @@ function createFloatingLetter(src) {
     img.className = 'letter';
 
     // Taille 5 fois plus grande : entre 750px et 1500px
-    const size = 1000
+    const size = 1000;
     img.style.width = size + 'px';
     img.style.height = 'auto'; // Garde le ratio d'aspect correct
 
     // Position initiale aléatoire unique pour chaque lettre
-    let x = Math.random() * (100 - (size / window.innerWidth * 100));
-    let y = Math.random() * (100 - (size / window.innerHeight * 100));
-    img.style.left = x + 'vw';
-    img.style.top = y + 'vh';
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+
+    let x = Math.random() * (containerWidth - size);
+    let y = Math.random() * (containerHeight - size);
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
 
     container.appendChild(img);
 
     // Vitesse horizontale et verticale aléatoires entre deux bornes
-    const minSpeed = 0.005;
-    const maxSpeed = 0.02;
+    const minSpeed = 0.5; // Valeurs ajustées pour test
+    const maxSpeed = 2;
     let speedX = Math.random() * (maxSpeed - minSpeed) + minSpeed;
     let speedY = Math.random() * (maxSpeed - minSpeed) + minSpeed;
 
     // Direction initiale aléatoire pour les deux axes
-    if (Math.random() < 0.5) {
-        speedX *= -1;
-    }
-    if (Math.random() < 0.5) {
-        speedY *= -1;
-    }
+    if (Math.random() < 0.5) speedX *= -1;
+    if (Math.random() < 0.5) speedY *= -1;
 
-    // Paramètres pour le mouvement vertical
-    let time = Math.random() * 100; // Temps initial aléatoire pour éviter les chevauchements
-    const freqY = Math.random() * 0.1 + 0.05; // Fréquence pour mouvement vertical
-    const ampY = Math.random() * 5 + 5; // Amplitude pour mouvement vertical
-
+    // Fonction d'animation pour le mouvement chaotique
     function animate() {
         // Déplacement horizontal
         x += speedX;
-
         // Rebondir sur les bords horizontaux
-        if (x > 100 - (size / window.innerWidth * 100)) {
-            x = 100 - (size / window.innerWidth * 100); // Réinitialiser pour éviter de sortir du cadre
-            speedX *= -1; // Inverser la direction horizontale
-        } else if (x < 0) {
-            x = 0; // Réinitialiser pour éviter de sortir du cadre
-            speedX *= -1; // Inverser la direction horizontale
-        }
-
-        // Déplacement vertical basé sur une fonction sinusoïdale pour un mouvement fluide
+        if (x > containerWidth - size || x < 0) speedX *= -1;
+        // Déplacement vertical
         y += speedY;
-        if (y > 100 - (size / window.innerHeight * 100)) {
-            y = 100 - (size / window.innerHeight * 100); // Limite le maximum de `y`
-            speedY *= -1; // Inverser la direction verticale
-        } else if (y < 0) {
-            y = 0; // Limite le minimum de `y`
-            speedY *= -1; // Inverser la direction verticale
-        }
+        // Rebondir sur les bords verticaux
+        if (y > containerHeight - size || y < 0) speedY *= -1;
 
-        img.style.left = x + 'vw';
-        img.style.top = y + 'vh';
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
 
         requestAnimationFrame(animate);
     }
@@ -70,6 +52,7 @@ function createFloatingLetter(src) {
     animate();
 }
 
+// Liste des images
 const images = [
     "images/A.png",
     "images/B.png",
@@ -92,9 +75,9 @@ initialize();
 
 // Gestion des événements pour changement de couleur de fond
 container.addEventListener('mouseover', () => {
-    document.body.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
+    container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
 });
 
 container.addEventListener('mouseout', () => {
-    document.body.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
+    container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
 });

@@ -8,18 +8,25 @@ body {
 .container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 900px; /* Hauteur fixe de la div */
     transition: background-color 0.5s ease; /* Transition pour changement de couleur */
+    overflow: hidden; /* Assure que les lettres restent à l'intérieur */
 }
 
+/* Lettres flottantes */
 .letter {
     position: absolute;
     will-change: transform; /* Optimise les performances */
     opacity: 0.85;
-    transition: transform 0.5s linear; /* Transition lisse */
+    transition: transform 1s ease-out; /* Transition lisse pour le déplacement */
 }
 
 /* Changement de couleur de fond au survol */
 .container:hover {
     background-color: #0000ff; /* Bleu lorsque survolé */
+}
+
+/* Animation pour placer les lettres au centre */
+.container.center-letters .letter {
+    transform: translate(0, 0) !important; /* Réinitialise la transformation pour le centrage */
 }
