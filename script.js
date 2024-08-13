@@ -19,33 +19,36 @@ function createFloatingLetter(src) {
 
     container.appendChild(img);
 
-    // Vitesse de déplacement (5 fois plus lente)
-    const speed = 0.01; // Réduit la vitesse
+    // Vitesse de déplacement (encore plus lente)
+    const speed = 0.005; // Réduit la vitesse encore plus
 
     // Paramètres pour le mouvement chaotique
     let time = Math.random() * 100; // Temps initial aléatoire pour éviter les chevauchements
-    const freqX = Math.random() * 0.5 + 0.1; // Fréquence pour mouvement horizontal
-    const freqY = Math.random() * 0.5 + 0.1; // Fréquence pour mouvement vertical
-    const ampX = Math.random() * 5 + 5; // Amplitude pour mouvement horizontal
-    const ampY = Math.random() * 5 + 5; // Amplitude pour mouvement vertical
+    const freqY = Math.random() * 0.1 + 0.05; // Fréquence pour mouvement vertical
+    const ampY = Math.random() * 2 + 2; // Amplitude pour mouvement vertical
 
     function animate() {
-        // Déplacement horizontal et vertical basé sur plusieurs sinusoïdes
+        // Déplacement horizontal (constant)
         x += speed;
-        y += Math.sin(time * freqY) * ampY;
 
         // Rebondir sur les bords horizontaux
         if (x > 100 - (size / window.innerWidth * 100) || x < 0) {
-            // Inverser la direction horizontale
-            speed *= -1;
+            speed *= -1; // Inverser la direction horizontale
         }
 
-        // Ajuster la position basée sur une combinaison de sinusoïdes
+        // Déplacement vertical basé sur une fonction sinusoïdale pour un mouvement fluide
+        y += Math.sin(time * freqY) * ampY;
+        time += 0.01; // Ajuster le temps pour un mouvement plus fluide
+
+        // Assurer que les lettres restent dans le cadre
+        if (y > 100 - (size / window.innerHeight * 100)) {
+            y = 100 - (size / window.innerHeight * 100); // Limite le maximum de `y`
+        } else if (y < 0) {
+            y = 0; // Limite le minimum de `y`
+        }
+
         img.style.left = x + 'vw';
         img.style.top = y + 'vh';
-
-        // Incrémenter le temps pour le mouvement chaotique
-        time += 0.05;
 
         requestAnimationFrame(animate);
     }
