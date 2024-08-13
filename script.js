@@ -75,7 +75,7 @@ function initialize() {
 
 initialize();
 
-// Fonction pour recentrer les lettres au centre de la div
+// Fonction pour centrer les lettres au centre de la div avec une animation fluide
 function centerLetters() {
     const containerRect = container.getBoundingClientRect();
     const centerX = containerRect.width / 2;
@@ -83,13 +83,19 @@ function centerLetters() {
 
     document.querySelectorAll('.letter').forEach(img => {
         const imgRect = img.getBoundingClientRect();
-        const imgCenterX = imgRect.width / 2;
-        const imgCenterY = imgRect.height / 2;
+        const imgWidth = imgRect.width;
+        const imgHeight = imgRect.height;
+
+        const imgLeft = imgRect.left - containerRect.left;
+        const imgTop = imgRect.top - containerRect.top;
+
+        const imgCenterX = imgLeft + imgWidth / 2;
+        const imgCenterY = imgTop + imgHeight / 2;
 
         const translateX = centerX - imgCenterX;
         const translateY = centerY - imgCenterY;
 
-        img.style.transition = 'transform 0.5s ease'; // Transition lisse pour le centrage
+        img.style.transition = 'transform 1s ease'; // Transition lisse pour le centrage
         img.style.transform = `translate(${translateX}px, ${translateY}px)`;
     });
 }
@@ -97,11 +103,11 @@ function centerLetters() {
 // Gestion des événements pour changement de couleur de fond et centrage des lettres
 container.addEventListener('mouseover', () => {
     container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
-    container.classList.add('center-letters');
+    container.classList.add('center-letters'); // Applique la classe pour centrer les lettres
     centerLetters();
 });
 
 container.addEventListener('mouseout', () => {
     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
-    container.classList.remove('center-letters');
+    container.classList.remove('center-letters'); // Retire la classe pour reprendre le mouvement
 });

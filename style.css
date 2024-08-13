@@ -18,7 +18,7 @@ body {
     position: absolute;
     will-change: transform; /* Optimise les performances */
     opacity: 0.85;
-    transition: transform 0.5s ease, border 0.5s ease; /* Transition lisse pour le déplacement et la bordure */
+    transition: transform 1s ease, border 0.5s ease; /* Transition lisse pour le déplacement et la bordure */
     border: 2px solid #000; /* Bordure noire de 2px */
     box-sizing: border-box; /* Inclut la bordure dans les dimensions de l'élément */
 }
@@ -26,4 +26,10 @@ body {
 /* Changement de couleur de fond au survol */
 .container:hover {
     background-color: #0000ff; /* Bleu lorsque survolé */
+}
+
+/* Classe pour centrer les lettres */
+.center-letters .letter {
+    transition: transform 1s ease; /* Transition pour le centrage */
+    transform: translate(calc(50vw - 50%), calc(50vh - 50%)); /* Centrer les images */
 }
