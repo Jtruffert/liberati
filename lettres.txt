@@ -1,0 +1,13 @@
+const images = [
+    "images/A.png",
+    // "images/B.png",
+    // "images/E.png",
+    // "images/I.png",
+    // "images/I2.png",
+    // "images/L.png",
+    // "images/R.png",
+    // "images/T.png",
+    // "images/W1.png",
+    // "images/W2.png",
+    // Ajoutez ici les chemins de toutes vos images de lettres
+];

@@ -19,14 +19,18 @@ function createFloatingLetter(src) {
 
     container.appendChild(img);
 
-    // Vitesse horizontale aléatoire entre deux bornes
+    // Vitesse horizontale et verticale aléatoires entre deux bornes
     const minSpeed = 0.005;
     const maxSpeed = 0.02;
-    let speed = Math.random() * (maxSpeed - minSpeed) + minSpeed;
+    let speedX = Math.random() * (maxSpeed - minSpeed) + minSpeed;
+    let speedY = Math.random() * (maxSpeed - minSpeed) + minSpeed;
 
-    // Direction initiale aléatoire
+    // Direction initiale aléatoire pour les deux axes
     if (Math.random() < 0.5) {
-        speed *= -1;
+        speedX *= -1;
+    }
+    if (Math.random() < 0.5) {
+        speedY *= -1;
     }
 
     // Paramètres pour le mouvement vertical
@@ -36,26 +40,25 @@ function createFloatingLetter(src) {
 
     function animate() {
         // Déplacement horizontal
-        x += speed;
+        x += speedX;
 
         // Rebondir sur les bords horizontaux
         if (x > 100 - (size / window.innerWidth * 100)) {
             x = 100 - (size / window.innerWidth * 100); // Réinitialiser pour éviter de sortir du cadre
-            speed *= -1; // Inverser la direction horizontale
+            speedX *= -1; // Inverser la direction horizontale
         } else if (x < 0) {
             x = 0; // Réinitialiser pour éviter de sortir du cadre
-            speed *= -1; // Inverser la direction horizontale
+            speedX *= -1; // Inverser la direction horizontale
         }
 
         // Déplacement vertical basé sur une fonction sinusoïdale pour un mouvement fluide
-        y += Math.sin(time * freqY) * 0.5; // Ajuster l'amplitude pour un mouvement vertical fluide
-        time += 0.02; // Ajuster le temps pour un mouvement plus fluide
-
-        // Assurer que les lettres restent dans le cadre verticalement
+        y += speedY;
         if (y > 100 - (size / window.innerHeight * 100)) {
             y = 100 - (size / window.innerHeight * 100); // Limite le maximum de `y`
+            speedY *= -1; // Inverser la direction verticale
         } else if (y < 0) {
             y = 0; // Limite le minimum de `y`
+            speedY *= -1; // Inverser la direction verticale
         }
 
         img.style.left = x + 'vw';
@@ -67,7 +70,6 @@ function createFloatingLetter(src) {
     animate();
 }
 
-// Définir les images avec les vraies lettres
 const images = [
     "images/A.png",
     "images/B.png",
@@ -79,7 +81,6 @@ const images = [
     "images/T.png",
     "images/W1.png",
     "images/W2.png",
-    // Ajoutez ici les chemins de toutes vos images de lettres
 ];
 
 // Assurez-vous que les lettres ne se chevauchent pas au démarrage
