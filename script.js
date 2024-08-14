@@ -94,10 +94,6 @@ function updateLetterPosition(img, elapsed, index) {
 // Démarrage de l'initialisation
 initialize();
 
-<<<<<<< HEAD
-// // Gestion des événements pour changement de couleur de fond et centrage des lettres
-// container.addEventListener('mouseenter', () => {
-=======
 
 // Fonction pour centrer les lettres au centre de la div avec une animation fluide
 function centerLetters() {
@@ -150,7 +146,6 @@ container.addEventListener('mouseenter', () => {
 
 
 // container.addEventListener('mouseover', () => {
->>>>>>> dev3
 //     container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
 //     // Réinitialisation de la transformation pour chaque lettre
 //     document.querySelectorAll('.letter').forEach(img => {
@@ -163,14 +158,14 @@ container.addEventListener('mouseenter', () => {
 // });
 
 
-// container.addEventListener('mouseleave', () => {
-//     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
-//     // Réinitialisation de la transformation pour chaque lettre
-//     document.querySelectorAll('.letter').forEach(img => {
-//         img.style.transform = ''; // Supprime la transformation
-//         img.offsetHeight; // Forcer un reflow pour garantir que la réinitialisation est prise en compte
-//     });
-// });
+container.addEventListener('mouseleave', () => {
+    container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
+    // Réinitialisation de la transformation pour chaque lettre
+    document.querySelectorAll('.letter').forEach(img => {
+        img.style.transform = ''; // Supprime la transformation
+        img.offsetHeight; // Forcer un reflow pour garantir que la réinitialisation est prise en compte
+    });
+});
 
 
 // function startSinusoidalAnimation() {
