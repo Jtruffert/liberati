@@ -26,19 +26,20 @@ function createFloatingLetter(src) {
 // Liste des images
 const images = [
     "images/A.png",
-    // "images/B.png",
-    // "images/E.png",
-    // "images/I.png",
-    // "images/I2.png",
-    // "images/L.png",
-    // "images/R.png",
-    // "images/T.png",
-    // "images/W1.png",
-    // "images/W2.png",
+    "images/B.png",
+    "images/E.png",
+    "images/I.png",
+    "images/I2.png",
+    "images/L.png",
+    "images/R.png",
+    "images/T.png",
+    "images/W1.png",
+    "images/W2.png",
 ];
 
 // Assurez-vous que les lettres ne se chevauchent pas au démarrage
 function initialize() {
+    console.log("initialize")
     images.forEach(src => createFloatingLetter(src));
 }
 
@@ -46,6 +47,7 @@ initialize();
 
 // Fonction pour centrer les lettres au centre de la div avec une animation fluide
 function centerLetters() {
+    console.log("centerLetter")
     const containerRect = container.getBoundingClientRect();
     const centerX = containerRect.width / 2;
     const centerY = containerRect.height / 2;
@@ -85,4 +87,5 @@ container.addEventListener('mouseenter', () => {
 container.addEventListener('mouseleave', () => {
     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
     // container.classList.remove('center-letters'); // Retire la classe pour reprendre le mouvement
+    centerLetters();
 });
