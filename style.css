@@ -23,13 +23,14 @@ body {
     box-sizing: border-box; /* Inclut la bordure dans les dimensions de l'élément */
 }
 
-/* Changement de couleur de fond au survol */
-.container:hover {
-    background-color: #0000ff; /* Bleu lorsque survolé */
+.center-letters {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;     /* Centre verticalement */
+    height: 100vh;           /* Assurez-vous que le conteneur a une hauteur définie */
+    width: 100vw;            /* Assurez-vous que le conteneur a une largeur définie */
 }
 
-/* Classe pour centrer les lettres */
 .center-letters .letter {
-    transition: transform 1s ease; /* Transition pour le centrage */
-    transform: translate(calc(50vw - 50%), calc(50vh - 50%)); /* Centrer les images */
+    transition: transform 1s ease;
 }
