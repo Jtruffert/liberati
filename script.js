@@ -133,7 +133,7 @@ function centerLetters() {
 
 // Gestion des événements pour changement de couleur de fond et centrage des lettres
 container.addEventListener('mouseenter', () => {
-    container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
+    // container.style.backgroundColor = '#0000ff'; 
     // Réinitialisation de la transformation pour chaque lettre
     document.querySelectorAll('.letter').forEach(img => {
         img.style.transition = 'none'; // Désactive la transition temporairement
