@@ -1,28 +1,5 @@
 const container = document.querySelector('.container');
 
-// Fonction pour créer une image de lettre flottante avec un mouvement chaotique
-function createFloatingLetter(src) {
-    const img = document.createElement('img');
-    img.src = src;
-    img.className = 'letter';
-
-    // Taille 5 fois plus grande : entre 750px et 1500px
-    const size = 1000;
-    img.style.width = size + 'px';
-    img.style.height = 'auto'; // Garde le ratio d'aspect correct
-
-    // Position initiale aléatoire unique pour chaque lettre
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-
-    let x = Math.random() * (containerWidth - size);
-    let y = Math.random() * (containerHeight - size);
-    img.style.left = x + 'px';
-    img.style.top = y + 'px';
-
-    container.appendChild(img);
-}
-
 // Liste des images
 const images = [
     "images/A.png",
@@ -37,13 +14,86 @@ const images = [
     "images/W2.png",
 ];
 
-// Assurez-vous que les lettres ne se chevauchent pas au démarrage
+// Initialisation du système
 function initialize() {
-    console.log("initialize")
+    console.log("initialize");
     images.forEach(src => createFloatingLetter(src));
+    animateLetters(); // Démarre l'animation après l'initialisation
 }
 
+// Crée une image de lettre flottante avec position initiale
+function createFloatingLetter(src) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'letter';
+
+    // Définir la taille de l'image
+    const size = 1000;
+    img.style.width = size + 'px';
+    img.style.height = 'auto';
+    img.style.position = 'absolute';
+
+    // Position initiale aléatoire
+    positionLetterRandomly(img, size);
+
+    // Ajouter l'image au conteneur
+    container.appendChild(img);
+
+    // Enregistre la position initiale pour l'animation
+    saveInitialPosition(img);
+}
+
+// Positionne l'image de manière aléatoire dans le conteneur
+function positionLetterRandomly(img, size) {
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+
+    const x = Math.random() * (containerWidth - size);
+    const y = Math.random() * (containerHeight - size);
+    
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+}
+
+// Enregistre la position initiale de l'image
+function saveInitialPosition(img) {
+    img.dataset.originalTop = parseFloat(img.style.top);
+}
+
+// Anime les lettres de manière sinusoïdale
+function animateLetters() {
+    const letters = document.querySelectorAll('.letter');
+    let startTime = null;
+
+    function step(time) {
+        if (!startTime) startTime = time;
+        const elapsed = time - startTime;
+
+        letters.forEach((img, index) => {
+            updateLetterPosition(img, elapsed, index);
+        });
+
+        requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+}
+
+// Met à jour la position d'une lettre pour créer un mouvement sinusoïdal
+function updateLetterPosition(img, elapsed, index) {
+    const amplitude = 50; // Amplitude du mouvement en pixels
+    const speed = 0.002;  // Vitesse du mouvement
+    const originalTop = parseFloat(img.dataset.originalTop);
+
+    // Calcule la nouvelle position en y en utilisant une fonction sinusoïdale
+    const newY = originalTop + amplitude * Math.sin(speed * elapsed + index);
+
+    img.style.top = newY + 'px';
+}
+
+// Démarrage de l'initialisation
 initialize();
+
 
 // Fonction pour centrer les lettres au centre de la div avec une animation fluide
 function centerLetters() {
