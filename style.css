@@ -19,7 +19,7 @@ body {
     will-change: transform; /* Optimise les performances */
     opacity: 0.85;
     transition: transform 1s ease, border 0.5s ease; /* Transition lisse pour le déplacement et la bordure */
-    border: 2px solid #000; /* Bordure noire de 2px */
+    /* border: 2px solid #000;  */
     box-sizing: border-box; /* Inclut la bordure dans les dimensions de l'élément */
 }
 

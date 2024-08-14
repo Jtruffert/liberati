@@ -94,8 +94,63 @@ function updateLetterPosition(img, elapsed, index) {
 // Démarrage de l'initialisation
 initialize();
 
+<<<<<<< HEAD
 // // Gestion des événements pour changement de couleur de fond et centrage des lettres
 // container.addEventListener('mouseenter', () => {
+=======
+
+// Fonction pour centrer les lettres au centre de la div avec une animation fluide
+function centerLetters() {
+    console.log("centerLetter")
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.width / 2;
+    const centerY = containerRect.height / 2;
+
+    document.querySelectorAll('.letter').forEach(img => {
+        // Réinitialisation de la transformation
+        img.style.transform = '';
+
+        // Forcer un reflow pour garantir que la réinitialisation est prise en compte
+        img.offsetHeight;
+
+        const imgRect = img.getBoundingClientRect();
+        const imgWidth = imgRect.width;
+        const imgHeight = imgRect.height;
+
+        // Position actuelle de l'image dans la div
+        const imgLeft = imgRect.left - containerRect.left;
+        const imgTop = imgRect.top - containerRect.top;
+
+        // Calcul du centre de l'image
+        const imgCenterX = imgLeft + imgWidth / 2;
+        const imgCenterY = imgTop + imgHeight / 2;
+
+        // Calcul du déplacement nécessaire pour centrer l'image
+        const translateX = centerX - imgCenterX;
+        const translateY = centerY - imgCenterY;
+
+        // Déplacement vers le centre
+        // img.style.transition = 'transform 1s ease'; // Transition lisse pour le centrage
+        img.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    });
+}
+
+// Gestion des événements pour changement de couleur de fond et centrage des lettres
+container.addEventListener('mouseenter', () => {
+    // container.style.backgroundColor = '#0000ff'; 
+    // Réinitialisation de la transformation pour chaque lettre
+    document.querySelectorAll('.letter').forEach(img => {
+        img.style.transition = 'none'; // Désactive la transition temporairement
+        img.style.transform = ''; // Supprime la transformation en cours
+        img.offsetHeight; // Force un reflow pour garantir la réinitialisation
+        img.style.transition = 'transform 1s ease'; // Réactive la transition
+    });
+    centerLetters();
+});
+
+
+// container.addEventListener('mouseover', () => {
+>>>>>>> dev3
 //     container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
 //     // Réinitialisation de la transformation pour chaque lettre
 //     document.querySelectorAll('.letter').forEach(img => {
