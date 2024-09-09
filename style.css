@@ -1,8 +1,7 @@
-/* Règles de base */
 body {
     margin: 0;
-    overflow: hidden; /* Empêche le défilement */
-    background-color: #f0f0f0; /* Couleur de fond initiale */
+    overflow-y: auto; /* Permet le défilement vertical */
+    background-color: #f0f0f0;
 }
 
 .container {
@@ -33,4 +32,21 @@ body {
 
 .center-letters .letter {
     transition: transform 1s ease;
+}
+
+/* Styles pour centrer la vidéo et l'étendre sur toute la largeur */
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; /* La vidéo prendra toute la largeur de la fenêtre */
+    height: auto;
+    margin-top: 20px; /* Optionnel, pour ajouter un peu d'espace au-dessus de la vidéo */
+}
+
+.video-container video {
+    width: 100%; /* La vidéo s'étendra sur toute la largeur disponible */
+    max-width: 100%; /* S'assure que la vidéo ne dépasse pas la largeur de la fenêtre */
+    height: auto; /* Préserve le ratio d'aspect de la vidéo */
+    display: block; /* Enlève les marges par défaut du navigateur */
 }
