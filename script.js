@@ -145,19 +145,6 @@ container.addEventListener('mouseenter', () => {
 });
 
 
-// container.addEventListener('mouseover', () => {
-//     container.style.backgroundColor = '#0000ff'; // Bleu lorsque la souris est sur la div
-//     // Réinitialisation de la transformation pour chaque lettre
-//     document.querySelectorAll('.letter').forEach(img => {
-//         img.style.transition = 'none'; // Désactive la transition temporairement
-//         img.style.transform = ''; // Supprime la transformation en cours
-//         img.offsetHeight; // Force un reflow pour garantir la réinitialisation
-//         img.style.transition = 'transform 1s ease'; // Réactive la transition
-//     });
-//     centerLetters();
-// });
-
-
 container.addEventListener('mouseleave', () => {
     container.style.backgroundColor = '#f0f0f0'; // Blanc lorsque la souris quitte la div
     // Réinitialisation de la transformation pour chaque lettre
@@ -168,22 +155,3 @@ container.addEventListener('mouseleave', () => {
 });
 
 
-// function startSinusoidalAnimation() {
-//     // Si une animation est déjà en cours, ne rien faire
-//     if (animationInterval) return;
-
-//     const amplitude = 20; // Amplitude du mouvement
-//     const frequency = 0.05; // Fréquence du mouvement
-
-//     // Démarre l'animation à intervalle régulier
-//     animationInterval = setInterval(() => {
-//         document.querySelectorAll('.letter').forEach((img, index) => {
-//             const now = Date.now();
-//             const offsetX = amplitude * Math.sin(frequency * now + index);
-//             const offsetY = amplitude * Math.cos(frequency * now + index);
-//             img.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-//         });
-//     }, 1000 / 60); // 60 FPS
-// }
-
-// startSinusoidalAnimation();
