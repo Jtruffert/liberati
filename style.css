@@ -54,13 +54,15 @@ body {
 
 .aldrich-bold {
     font-family: 'Aldrich', sans-serif;
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
+    text-align: center;  /* This centers the text */
+    display: block;  /* Ensure it's treated as a block element for centering */
 }
 
 .texte-ajoute {
     font-family: Arial, sans-serif;
-    font-size: 11px;
+    font-size: 22px;
     font-weight: normal;
     line-height: 1.6;
 }
